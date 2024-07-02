@@ -12,7 +12,6 @@ interface HeadlineProps {
 }
 
 export const Headline = (props: HeadlineProps) => {
-  console.log(props);
   return (
     <>
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
