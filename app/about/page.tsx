@@ -1,5 +1,6 @@
 import { Links } from "../components/Links";
 import { Headline } from "../components/Headline";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         obj={{ foo: "foo", bar: 12 }}
         bool
       />
+      <Link href="/">home</Link>
       <Links />
     </main>
   );
