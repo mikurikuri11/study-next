@@ -2,17 +2,18 @@
 
 import { Links } from "./components/Links";
 import { Headline } from "./components/Headline";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Home() {
-  // let foo = 1;
-
   const [foo, setFoo] = useState(1);
-  const handleClick = (e: any) => {
-    setFoo(foo => foo + 1);
+
+  const handleClick = useCallback((e: any) => {
     console.log(foo);
-  };
+    if (foo < 10) {
+      setFoo(foo => foo + 1);
+    }
+  }, [foo]);
 
   useEffect(() => {
     document.body.style.backgroundColor = "lightblue";
@@ -20,7 +21,7 @@ export default function Home() {
     return () => {
       document.body.style.backgroundColor = "";
     }
-  }, [])
+  }, [foo])
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
