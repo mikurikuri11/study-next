@@ -2,14 +2,17 @@
 
 import { Links } from "./components/Links";
 import { Headline } from "./components/Headline";
-import { useCallback, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Home() {
-  const handleClick = useCallback((e: any) => {
-    e.preventDefault();
-    alert("ボタンがクリックされました");
-  }, []);
+  // let foo = 1;
+
+  const [foo, setFoo] = useState(1);
+  const handleClick = (e: any) => {
+    setFoo(foo => foo + 1);
+    console.log(foo);
+  };
 
   useEffect(() => {
     document.body.style.backgroundColor = "lightblue";
@@ -27,6 +30,7 @@ export default function Home() {
         obj={{ foo: "foo", bar: 15 }}
         bool={false}
       />
+      <h1>{foo}</h1>
       <section className="flex gap-3">
         <button onClick={handleClick}>ボタン</button>
         <Link href="/about">about</Link>
