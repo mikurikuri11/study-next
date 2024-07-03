@@ -9,11 +9,12 @@ export default function Home() {
   const [count, setCount] = useState(1);
   const [text, setText] = useState("");
   const [isShow, setIsShow] = useState(true);
+  const [array, setArray] = useState<string[]>([]);
 
   const handleClick = useCallback(
     (e: any) => {
       if (count < 10) {
-        setCount((count) => count + 1);
+        setCount((prevCount) => prevCount + 1);
       }
     },
     [count]
@@ -28,8 +29,18 @@ export default function Home() {
   }, []);
 
   const handleShow = useCallback(() => {
-    setIsShow(isShow => !isShow);
+    setIsShow((prevIsShow) => !prevIsShow);
   }, []);
+
+  const handleAdd = useCallback(() => {
+    setArray((prevArray) => {
+      if (prevArray.some((item) => item === text)) {
+        alert("同じ値が既に存在しています");
+        return prevArray;
+      }
+      return [...prevArray, text];
+    });
+  }, [text]);
 
   useEffect(() => {
     document.body.style.backgroundColor = "lightblue";
@@ -48,8 +59,14 @@ export default function Home() {
         bool={false}
       />
       {isShow ? <h1>{count}</h1> : null}
+      <ul>
+        {array.map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
       <section className="flex gap-3">
-        <button onClick={handleClick}>ボタン</button>
+        <button onClick={handleAdd}>配列ボタン</button>
+        <button onClick={handleClick}>数字ボタン</button>
         <button onClick={handleShow}>真偽値ボタン</button>
         <input
           className="bg-gray-500 p-2 rounded-md"
